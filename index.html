@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cards-punch</title>
+      <style type="text/css">
+:root {
+    --blue: rgb(129 158 191);
+    --black: rgb(37 47 61);
+    --white: rgb(244 244 244);
+    --grey: rgb(76 89 105);
+}
+
+body {
+background-color: var(--white);
+width: 100vw;
+height: 100vh;
+padding: 10vh 5vw;
+font-family: monospace;
+}
+
+table {
+  background: url('noise.png'), var(--blue);
+  color: var(--black);
+  width: 88vw;
+  height: 42vh;
+  border-radius: 5.5vh 2vh 4vh 2.5vh;
+  padding: 0 3vw 1vh;
+  table-layout: fixed;
+
+  border-spacing: 0;
+  border-collapse: separate;
+}
+.wrap {
+  position: relative;
+}
+
+#id { 
+  rotate:-90deg;
+  position: absolute;
+  bottom: 40px;
+  right: 5px;
+
+}
+
+td {
+  text-align: center;
+  width: .01333333vw;
+  height: .04vh;
+  width: 8px;
+  height: 20px;
+
+}
+td .row {
+  /*
+  transform: scale(1, 1.5);
+  -webkit-transform: scale(1, 1.5); /* Safari and Chrome */
+  -moz-transform: scale(1, 1.5); /* Firefox */
+  -ms-transform: scale(1, 1.5); /* IE 9+ */
+  -o-transform: scale(1, 1.5); /* Opera */
+  */
+}
+
+td.punch {
+  background: linear-gradient(301deg, rgba(244,244,244,1) 0%, rgb(241 241 241) -11%, rgba(232,232,232,1) 100%);
+  
+  font-size: 0;
+  border-top: 2px solid var(--blue);
+  border-left: 2px solid var(--blue);
+  border-right: solid 2px #8290a0;
+  border-bottom: solid 1px #6b8eb5;
+
+}
+tr.col {
+  position: relative;
+  top: -1rem;
+  font-size: 5.75pt;
+}
+tr.col td {
+  height: 10px;
+}
+#chars {
+  margin-top: -1rem;
+  color: var(--grey);
+  font-size: 13pt;
+}
+/*
+table:before {
+   content: ' ';
+   position: absolute;
+   top: 0;
+   left: 60px;
+   border-top: 60px solid var(--white);
+   width: 0;
+}
+*/
+@media (min-width: 1024px) and (max-width: 4000px) {
+  table {
+    width: 1300px;
+    margin: 0 auto;
+  }
+}
+
+
+@media (max-width: 1000px) {
+  table {
+    rotate: 90deg;
+  }
+  body {
+    margin-top: 60vh;
+    margin-left: -60vw;
+    padding: 0;
+  }
+}
+
+      </style>
+  </head>
+<body>
+  <table>
+    <tr id="chars">
+      <td class="null"></td>
+      <td class="0">0</td>
+      <td class="1">1</td>
+      <td class="2">2</td>
+      <td class="3">3</td>
+      <td class="4">4</td>
+      <td class="5">5</td>
+      <td class="6">6</td>
+      <td class="7">7</td>
+      <td class="8">8</td>
+      <td class="9">9</td>
+      <td class="A">A</td>
+      <td class="B">B</td>
+      <td class="C">C</td>
+      <td class="D">D</td>
+      <td class="E">E</td>
+      <td class="F">F</td>
+      <td class="G">G</td>
+      <td class="H">H</td>
+      <td class="I">I</td>
+      <td class="J">J</td>
+      <td class="K">K</td>
+      <td class="L">L</td>
+      <td class="M">M</td>
+      <td class="N">N</td>
+      <td class="O">O</td>
+      <td class="P">P</td>
+      <td class="Q">Q</td>
+      <td class="R">R</td>
+      <td class="S">S</td>
+      <td class="T">T</td>
+      <td class="U">U</td>
+      <td class="V">V</td>
+      <td class="W">W</td>
+      <td class="X">X</td>
+      <td class="Y">Y</td>
+      <td class="Z">Z</td>
+      <td class="pound bad">#</td>
+      <td class="comma">,</td>
+      <td class="dollar-sign">$</td>
+      <td class="period">.</td>
+      <td class="dash">-</td>
+      <td class="at">@</td>
+      <td class="percent">%</td>
+      <td class="wildcard">*</td>
+      <td class="less-than">&lt;</td>
+      <td class="subtract">-</td>
+      <td class="divide">/</td>
+      <td class="plus">+</td>
+      <td class="underscore">_</td>
+      <td class="right-parens bad">)</td>
+      <td class="cent bad">(</td>
+      <td class="pipe">|</td>
+      <td class="amperstand">&amp;</td>
+      <td class="greater-than">&gt;</td>
+      <td class="colon">:</td>
+      <td class="semi-colon">;</td>
+      <td class="short bad">~</td>
+      <td class="high-dot bad">`</td>
+      <td class="question-mark">?</td>
+      <td class="double-quote">"</td>
+      <td class="equals">=</td>
+      <td class="exclamation-mark">!</td>
+      <td class="left-parens">(</td>
+      <td class="comma-2">,</td>
+      <td class="period-2">.</td>
+      <td class="67"></td>
+      <td class="68"></td>
+      <td class="69"></td>
+      <td class="70"></td>
+      <td class="71"></td>
+      <td class="72"></td>
+      <td class="73"></td>
+      <td class="74"></td>
+      <td class="75"></td>
+      <td class="76"></td>
+      <td class="77"></td>
+      <td class="78"></td>
+      <td class="79"></td>
+      <td class="80"></td>
+    </tr>
+
+    <tr id="level-1"> 
+      <td class="null"></td>
+      <td class="0"></td>
+      <td class="1"></td>
+      <td class="2"></td>
+      <td class="3"></td>
+      <td class="4"></td>
+      <td class="5"></td>
+      <td class="6"></td>
+      <td class="7"></td>
+      <td class="8"></td>
+      <td class="9"></td>
+      <td class="punch A"></td>
+      <td class="punch B"></td>
+      <td class="punch C"></td>
+      <td class="punch D"></td>
+      <td class="punch E"></td>
+      <td class="punch F"></td>
+      <td class="punch G"></td>
+      <td class="punch H"></td>
+      <td class="punch I"></td>
+      <td class="J"></td>
+      <td class="K"></td>
+      <td class="L"></td>
+      <td class="M"></td>
+      <td class="N"></td>
+      <td class="O"></td>
+      <td class="P"></td>
+      <td class="Q"></td>
+      <td class="R"></td>
+      <td class="S"></td>
+      <td class="T"></td>
+      <td class="U"></td>
+      <td class="V"></td>
+      <td class="W"></td>
+      <td class="X"></td>
+      <td class="Y"></td>
+      <td class="Z"></td>
+      <td class="pound"></td>
+      <td class="comma"></td>
+      <td class="dollar-sign"></td>
+      <td class="period"></td>
+      <td class="dash"></td>
+      <td class="at"></td>
+      <td class="percent"></td>
+      <td class="wildcard"></td>
+      <td class="punch less-than"></td>
+      <td class="subtract"></td>
+      <td class="divide"></td>
+      <td class="punch plus"></td>
+      <td class="underscore"></td>
+      <td class="punch right-parens"></td>
+      <td class="punch cent"></td>
+      <td class="punch pipe"></td>
+      <td class="amperstand"></td>
+      <td class="greater-than"></td>
+      <td class="colon"></td>
+      <td class="semi-colon"></td>
+      <td class="short"></td>
+      <td class="high-dot"></td>
+      <td class="question-mark"></td>
+      <td class="double-quote"></td>
+      <td class="equals"></td>
+      <td class="exclamation-mark"></td>
+      <td class="punch left-parens"></td>
+      <td class="comma-2"></td>
+      <td class="punch period-2"></td>
+      <td class="67"></td>
+      <td class="68"></td>
+      <td class="69"></td>
+      <td class="70"></td>
+      <td class="71"></td>
+      <td class="72"></td>
+      <td class="73"></td>
+      <td class="74"></td>
+      <td class="75"></td>
+      <td class="76"></td>
+      <td class="77"></td>
+      <td class="78"></td>
+      <td class="79"></td>
+      <td class="80"></td>
+    </tr>
+
+    <tr class="level2">
+      <td class="null"></td>
+      <td class="0"></td>
+      <td class="1"></td>
+      <td class="2"></td>
+      <td class="3"></td>
+      <td class="4"></td>
+      <td class="5"></td>
+      <td class="6"></td>
+      <td class="7"></td>
+      <td class="8"></td>
+      <td class="9"></td>
+      <td class="A"></td>
+      <td class="B"></td>
+      <td class="C"></td>
+      <td class="D"></td>
+      <td class="E"></td>
+      <td class="F"></td>
+      <td class="G"></td>
+      <td class="H"></td>
+      <td class="I"></td>
+      <td class="punch J"></td>
+      <td class="punch K"></td>
+      <td class="punch L"></td>
+      <td class="punch M"></td>
+      <td class="punch N"></td>
+      <td class="punch O"></td>
+      <td class="punch P"></td>
+      <td class="punch Q"></td>
+      <td class="punch R"></td>
+      <td class="S"></td>
+      <td class="T"></td>
+      <td class="U"></td>
+      <td class="V"></td>
+      <td class="W"></td>
+      <td class="X"></td>
+      <td class="Y"></td>
+      <td class="Z"></td>
+      <td class="pound"></td>
+      <td class="comma"></td>
+      <td class="punch dollar-sign"></td>
+      <td class="period"></td>
+      <td class="punch dash"></td>
+      <td class="at"></td>
+      <td class="percent"></td>
+      <td class="punch wildcard"></td>
+      <td class="less-than"></td>
+      <td class="punch subtract"></td>
+      <td class="divide"></td>
+      <td class="plus"></td>
+      <td class="underscore"></td>
+      <td class="punch right-parens"></td>
+      <td class="cent"></td>
+      <td class="pipe"></td>
+      <td class="amperstand"></td>
+      <td class="greater-than"></td>
+      <td class="colon"></td>
+      <td class="punch semi-colon"></td>
+      <td class="punch short"></td>
+      <td class="high-dot"></td>
+      <td class="question-mark"></td>
+      <td class="double-quote"></td>
+      <td class="equals"></td>
+      <td class="punch exclamation-mark"></td>
+      <td class="left-parens"></td>
+      <td class="comma-2"></td>
+      <td class="period-2"></td>
+      <td class="67"></td>
+      <td class="68"></td>
+      <td class="69"></td>
+      <td class="70"></td>
+      <td class="71"></td>
+      <td class="72"></td>
+      <td class="73"></td>
+      <td class="74"></td>
+      <td class="75"></td>
+      <td class="76"></td>
+      <td class="77"></td>
+      <td class="78"></td>
+      <td class="79"></td>
+      <td class="80"></td>
+    </tr>
+
+    <tr class="0">
+      <td class="null">0</td>
+      <td class="punch 0">0</td>
+      <td class="1">0</td>
+      <td class="2">0</td>
+      <td class="3">0</td>
+      <td class="4">0</td>
+      <td class="5">0</td>
+      <td class="6">0</td>
+      <td class="7">0</td>
+      <td class="8">0</td>
+      <td class="9">0</td>
+      <td class="A">0</td>
+      <td class="B">0</td>
+      <td class="C">0</td>
+      <td class="D">0</td>
+      <td class="E">0</td>
+      <td class="F">0</td>
+      <td class="G">0</td>
+      <td class="H">0</td>
+      <td class="I">0</td>
+      <td class="J">0</td>
+      <td class="K">0</td>
+      <td class="L">0</td>
+      <td class="M">0</td>
+      <td class="N">0</td>
+      <td class="O">0</td>
+      <td class="P">0</td>
+      <td class="Q">0</td>
+      <td class="R">0</td>
+      <td class="punch S">0</td>
+      <td class="punch T">0</td>
+      <td class="punch U">0</td>
+      <td class="punch V">0</td>
+      <td class="punch W">0</td>
+      <td class="punch X">0</td>
+      <td class="punch Y">0</td>
+      <td class="punch Z">0</td>
+      <td class="pound">0</td>
+      <td class="punch comma">0</td>
+      <td class="dollar-sign">0</td>
+      <td class="period">0</td>
+      <td class="dash">0</td>
+      <td class="at">0</td>
+      <td class="punch percent">0</td>
+      <td class="wildcard">0</td>
+      <td class="less-than">0</td>
+      <td class="subtract">0</td>
+      <td class="punch divide">0</td>
+      <td class="plus">0</td>
+      <td class="punch underscore">0</td>
+      <td class="right-parens">0</td>
+      <td class="cent">0</td>
+      <td class="pipe">0</td>
+      <td class="amperstand">0</td>
+      <td class="punch greater-than">0</td>
+      <td class="colon">0</td>
+      <td class="semi-colon">0</td>
+      <td class="short">0</td>
+      <td class="high-dot">0</td>
+      <td class="punch question-mark">0</td>
+      <td class="double-quote">0</td>
+      <td class="equals">0</td>
+      <td class="exclamation-mark">0</td>
+      <td class="left-parens">0</td>
+      <td class="punch comma-2">0</td>
+      <td class="period-2">0</td>
+      <td class="67">0</td>
+      <td class="68">0</td>
+      <td class="69">0</td>
+      <td class="70">0</td>
+      <td class="71">0</td>
+      <td class="72">0</td>
+      <td class="73">0</td>
+      <td class="74">0</td>
+      <td class="75">0</td>
+      <td class="76">0</td>
+      <td class="77">0</td>
+      <td class="78">0</td>
+      <td class="79">0</td>
+      <td class="80">0</td>
+    </tr>
+
+    <tr class="col">
+      <td class="null">1</td>
+      <td class="0">2</td>
+      <td class="1">3</td>
+      <td class="2">4</td>
+      <td class="3">5</td>
+      <td class="4">6</td>
+      <td class="5">7</td>
+      <td class="6">8</td>
+      <td class="7">9</td>
+      <td class="8">10</td>
+      <td class="9">11</td>
+      <td class="A">12</td>
+      <td class="B">13</td>
+      <td class="C">14</td>
+      <td class="D">15</td>
+      <td class="E">16</td>
+      <td class="F">17</td>
+      <td class="G">18</td>
+      <td class="H">19</td>
+      <td class="I">20</td>
+      <td class="J">21</td>
+      <td class="K">22</td>
+      <td class="L">23</td>
+      <td class="M">24</td>
+      <td class="N">25</td>
+      <td class="O">26</td>
+      <td class="P">27</td>
+      <td class="Q">28</td>
+      <td class="R">29</td>
+      <td class="S">30</td>
+      <td class="T">31</td>
+      <td class="U">32</td>
+      <td class="V">33</td>
+      <td class="W">34</td>
+      <td class="X">35</td>
+      <td class="Y">36</td>
+      <td class="Z">37</td>
+      <td class="pound">38</td>
+      <td class="comma">39</td>
+      <td class="dollar-sign">40</td>
+      <td class="period">41</td>
+      <td class="dash">42</td>
+      <td class="at">43</td>
+      <td class="percent">44</td>
+      <td class="wildcard">45</td>
+      <td class="less-than">46</td>
+      <td class="subtract">47</td>
+      <td class="divide">48</td>
+      <td class="plus">49</td>
+      <td class="underscore">50</td>
+      <td class="right-parens">51</td>
+      <td class="cent">52</td>
+      <td class="pipe">53</td>
+      <td class="amperstand">54</td>
+      <td class="greater-than">55</td>
+      <td class="colon">56</td>
+      <td class="semi-colon">57</td>
+      <td class="short">58</td>
+      <td class="high-dot">59</td>
+      <td class="question-mark">60</td>
+      <td class="double-quote">61</td>
+      <td class="equals">62</td>
+      <td class="exclamation-mark">63</td>
+      <td class="left-parens">64</td>
+      <td class="comma-2">65</td>
+      <td class="period-2">66</td>
+      <td class="67">67</td>
+      <td class="68">68</td>
+      <td class="69">69</td>
+      <td class="70">70</td>
+      <td class="71">71</td>
+      <td class="72">72</td>
+      <td class="73">73</td>
+      <td class="74">74</td>
+      <td class="75">75</td>
+      <td class="76">76</td>
+      <td class="77">77</td>
+      <td class="78">78</td>
+      <td class="79">79</td>
+      <td class="80">80</td>
+    </tr>
+
+    <tr class="1">
+      <td class="null">1</td>
+      <td class="0">1</td>
+      <td class="punch 1">1</td>
+      <td class="2">1</td>
+      <td class="3">1</td>
+      <td class="4">1</td>
+      <td class="5">1</td>
+      <td class="6">1</td>
+      <td class="7">1</td>
+      <td class="8">1</td>
+      <td class="9">1</td>
+      <td class="punch A">1</td>
+      <td class="B">1</td>
+      <td class="C">1</td>
+      <td class="D">1</td>
+      <td class="E">1</td>
+      <td class="F">1</td>
+      <td class="G">1</td>
+      <td class="H">1</td>
+      <td class="I">1</td>
+      <td class="punch J">1</td>
+      <td class="K">1</td>
+      <td class="L">1</td>
+      <td class="M">1</td>
+      <td class="N">1</td>
+      <td class="O">1</td>
+      <td class="P">1</td>
+      <td class="Q">1</td>
+      <td class="R">1</td>
+      <td class="S">1</td>
+      <td class="T">1</td>
+      <td class="U">1</td>
+      <td class="V">1</td>
+      <td class="W">1</td>
+      <td class="X">1</td>
+      <td class="Y">1</td>
+      <td class="Z">1</td>
+      <td class="pound">1</td>
+      <td class="comma">1</td>
+      <td class="dollar-sign">1</td>
+      <td class="period">1</td>
+      <td class="dash">1</td>
+      <td class="at">1</td>
+      <td class="percent">1</td>
+      <td class="wildcard">1</td>
+      <td class="less-than">1</td>
+      <td class="subtract">1</td>
+      <td class="punch divide">1</td>
+      <td class="plus">1</td>
+      <td class="underscore">1</td>
+      <td class="right-parens">1</td>
+      <td class="cent">1</td>
+      <td class="pipe">1</td>
+      <td class="amperstand">1</td>
+      <td class="greater-than">1</td>
+      <td class="colon">1</td>
+      <td class="semi-colon">1</td>
+      <td class="short">1</td>
+      <td class="high-dot">1</td>
+      <td class="question-mark">1</td>
+      <td class="double-quote">1</td>
+      <td class="equals">1</td>
+      <td class="exclamation-mark">1</td>
+      <td class="left-parens">1</td>
+      <td class="comma-2">1</td>
+      <td class="period-2">1</td>
+      <td class="67">1</td>
+      <td class="68">1</td>
+      <td class="69">1</td>
+      <td class="70">1</td>
+      <td class="71">1</td>
+      <td class="72">1</td>
+      <td class="73">1</td>
+      <td class="74">1</td>
+      <td class="75">1</td>
+      <td class="76">1</td>
+      <td class="77">1</td>
+      <td class="78">1</td>
+      <td class="79">1</td>
+      <td class="80">1</td>
+    </tr>
+
+    <tr class="2">
+      <td class="null">2</td>
+      <td class="0">2</td>
+      <td class="1">2</td>
+      <td class="punch 2">2</td>
+      <td class="3">2</td>
+      <td class="4">2</td>
+      <td class="5">2</td>
+      <td class="6">2</td>
+      <td class="7">2</td>
+      <td class="8">2</td>
+      <td class="9">2</td>
+      <td class="A">2</td>
+      <td class="punch B">2</td>
+      <td class="C">2</td>
+      <td class="D">2</td>
+      <td class="E">2</td>
+      <td class="F">2</td>
+      <td class="G">2</td>
+      <td class="H">2</td>
+      <td class="I">2</td>
+      <td class="J">2</td>
+      <td class="punch K">2</td>
+      <td class="L">2</td>
+      <td class="M">2</td>
+      <td class="N">2</td>
+      <td class="O">2</td>
+      <td class="P">2</td>
+      <td class="Q">2</td>
+      <td class="R">2</td>
+      <td class="punch S">2</td>
+      <td class="T">2</td>
+      <td class="U">2</td>
+      <td class="V">2</td>
+      <td class="W">2</td>
+      <td class="X">2</td>
+      <td class="Y">2</td>
+      <td class="Z">2</td>
+      <td class="pound">2</td>
+      <td class="comma">2</td>
+      <td class="dollar-sign">2</td>
+      <td class="period">2</td>
+      <td class="dash">2</td>
+      <td class="at">2</td>
+      <td class="percent">2</td>
+      <td class="wildcard">2</td>
+      <td class="less-than">2</td>
+      <td class="subtract">2</td>
+      <td class="divide">2</td>
+      <td class="plus">2</td>
+      <td class="underscore">2</td>
+      <td class="right-parens">2</td>
+      <td class="punch cent">2</td>
+      <td class="pipe">2</td>
+      <td class="amperstand">2</td>
+      <td class="greater-than">2</td>
+      <td class="punch colon">2</td>
+      <td class="semi-colon">2</td>
+      <td class="short">2</td>
+      <td class="high-dot">2</td>
+      <td class="question-mark">2</td>
+      <td class="double-quote">2</td>
+      <td class="equals">2</td>
+      <td class="punch exclamation-mark">2</td>
+      <td class="left-parens">2</td>
+      <td class="punch comma-2">2</td>
+      <td class="punch period-2">2</td>
+      <td class="67">2</td>
+      <td class="68">2</td>
+      <td class="69">2</td>
+      <td class="70">2</td>
+      <td class="71">2</td>
+      <td class="72">2</td>
+      <td class="73">2</td>
+      <td class="74">2</td>
+      <td class="75">2</td>
+      <td class="76">2</td>
+      <td class="77">2</td>
+      <td class="78">2</td>
+      <td class="79">2</td>
+      <td class="80">2</td>
+    </tr>
+
+    <tr class="3">
+      <td class="null">3</td>
+      <td class="0">3</td>
+      <td class="1">3</td>
+      <td class="2">3</td>
+      <td class="punch 3">3</td>
+      <td class="4">3</td>
+      <td class="5">3</td>
+      <td class="6">3</td>
+      <td class="7">3</td>
+      <td class="8">3</td>
+      <td class="9">3</td>
+      <td class="A">3</td>
+      <td class="B">3</td>
+      <td class="punch C">3</td>
+      <td class="D">3</td>
+      <td class="E">3</td>
+      <td class="F">3</td>
+      <td class="G">3</td>
+      <td class="H">3</td>
+      <td class="I">3</td>
+      <td class="J">3</td>
+      <td class="K">3</td>
+      <td class="punch L">3</td>
+      <td class="M">3</td>
+      <td class="N">3</td>
+      <td class="O">3</td>
+      <td class="P">3</td>
+      <td class="Q">3</td>
+      <td class="R">3</td>
+      <td class="S">3</td>
+      <td class="punch T">3</td>
+      <td class="U">3</td>
+      <td class="V">3</td>
+      <td class="W">3</td>
+      <td class="X">3</td>
+      <td class="Y">3</td>
+      <td class="Z">3</td>
+      <td class="punch pound">3</td>
+      <td class="punch comma">3</td>
+      <td class="punch dollar-sign">3</td>
+      <td class="punch period">3</td>
+      <td class="dash">3</td>
+      <td class="at">3</td>
+      <td class="percent">3</td>
+      <td class="wildcard">3</td>
+      <td class="less-than">3</td>
+      <td class="subtract">3</td>
+      <td class="divide">3</td>
+      <td class="plus">3</td>
+      <td class="underscore">3</td>
+      <td class="right-parens">3</td>
+      <td class="cent">3</td>
+      <td class="pipe">3</td>
+      <td class="amperstand">3</td>
+      <td class="greater-than">3</td>
+      <td class="colon">3</td>
+      <td class="semi-colon">3</td>
+      <td class="short">3</td>
+      <td class="high-dot">3</td>
+      <td class="question-mark">3</td>
+      <td class="double-quote">3</td>
+      <td class="equals">3</td>
+      <td class="exclamation-mark">3</td>
+      <td class="left-parens">3</td>
+      <td class="comma-2">3</td>
+      <td class="period-2">3</td>
+      <td class="67">3</td>
+      <td class="68">3</td>
+      <td class="69">3</td>
+      <td class="70">3</td>
+      <td class="71">3</td>
+      <td class="72">3</td>
+      <td class="73">3</td>
+      <td class="74">3</td>
+      <td class="75">3</td>
+      <td class="76">3</td>
+      <td class="77">3</td>
+      <td class="78">3</td>
+      <td class="79">3</td>
+      <td class="80">3</td>
+    </tr>
+
+    <tr class="4">
+      <td class="null">4</td>
+      <td class="0">4</td>
+      <td class="1">4</td>
+      <td class="2">4</td>
+      <td class="3">4</td>
+      <td class="punch 4">4</td>
+      <td class="5">4</td>
+      <td class="6">4</td>
+      <td class="7">4</td>
+      <td class="8">4</td>
+      <td class="9">4</td>
+      <td class="A">4</td>
+      <td class="B">4</td>
+      <td class="C">4</td>
+      <td class="punch D">4</td>
+      <td class="E">4</td>
+      <td class="F">4</td>
+      <td class="G">4</td>
+      <td class="H">4</td>
+      <td class="I">4</td>
+      <td class="J">4</td>
+      <td class="K">4</td>
+      <td class="L">4</td>
+      <td class="punch M">4</td>
+      <td class="N">4</td>
+      <td class="O">4</td>
+      <td class="P">4</td>
+      <td class="Q">4</td>
+      <td class="R">4</td>
+      <td class="S">4</td>
+      <td class="T">4</td>
+      <td class="punch U">4</td>
+      <td class="V">4</td>
+      <td class="W">4</td>
+      <td class="X">4</td>
+      <td class="Y">4</td>
+      <td class="Z">4</td>
+      <td class="pound">4</td>
+      <td class="comma">4</td>
+      <td class="dollar-sign">4</td>
+      <td class="period">4</td>
+      <td class="dash">4</td>
+      <td class="punch at">4</td>
+      <td class="punch percent">4</td>
+      <td class="punch wildcard">4</td>
+      <td class="punch less-than">4</td>
+      <td class="subtract">4</td>
+      <td class="divide">4</td>
+      <td class="plus">4</td>
+      <td class="underscore">4</td>
+      <td class="right-parens">4</td>
+      <td class="cent">4</td>
+      <td class="pipe">4</td>
+      <td class="amperstand">4</td>
+      <td class="greater-than">4</td>
+      <td class="colon">4</td>
+      <td class="semi-colon">4</td>
+      <td class="short">4</td>
+      <td class="high-dot">4</td>
+      <td class="question-mark">4</td>
+      <td class="double-quote">4</td>
+      <td class="equals">4</td>
+      <td class="exclamation-mark">4</td>
+      <td class="left-parens">4</td>
+      <td class="comma-2">4</td>
+      <td class="period-2">4</td>
+      <td class="67">4</td>
+      <td class="68">4</td>
+      <td class="69">4</td>
+      <td class="70">4</td>
+      <td class="71">4</td>
+      <td class="72">4</td>
+      <td class="73">4</td>
+      <td class="74">4</td>
+      <td class="75">4</td>
+      <td class="76">4</td>
+      <td class="77">4</td>
+      <td class="78">4</td>
+      <td class="79">4</td>
+      <td class="80">4</td>
+    </tr>
+
+    <tr class="5">
+      <td class="null">5</td>
+      <td class="0">5</td>
+      <td class="1">5</td>
+      <td class="2">5</td>
+      <td class="3">5</td>
+      <td class="4">5</td>
+      <td class="punch 5">5</td>
+      <td class="6">5</td>
+      <td class="7">5</td>
+      <td class="8">5</td>
+      <td class="9">5</td>
+      <td class="A">5</td>
+      <td class="B">5</td>
+      <td class="C">5</td>
+      <td class="D">5</td>
+      <td class="punch E">5</td>
+      <td class="F">5</td>
+      <td class="G">5</td>
+      <td class="H">5</td>
+      <td class="I">5</td>
+      <td class="J">5</td>
+      <td class="K">5</td>
+      <td class="L">5</td>
+      <td class="M">5</td>
+      <td class="punch N">5</td>
+      <td class="O">5</td>
+      <td class="P">5</td>
+      <td class="Q">5</td>
+      <td class="R">5</td>
+      <td class="S">5</td>
+      <td class="T">5</td>
+      <td class="U">5</td>
+      <td class="punch V">5</td>
+      <td class="W">5</td>
+      <td class="X">5</td>
+      <td class="Y">5</td>
+      <td class="Z">5</td>
+      <td class="pound">5</td>
+      <td class="comma">5</td>
+      <td class="dollar-sign">5</td>
+      <td class="period">5</td>
+      <td class="dash">5</td>
+      <td class="at">5</td>
+      <td class="percent">5</td>
+      <td class="wildcard">5</td>
+      <td class="less-than">5</td>
+      <td class="subtract">5</td>
+      <td class="divide">5</td>
+      <td class="plus">5</td>
+      <td class="punch underscore">5</td>
+      <td class="punch right-parens">5</td>
+      <td class="cent">5</td>
+      <td class="pipe">5</td>
+      <td class="amperstand">5</td>
+      <td class="greater-than">5</td>
+      <td class="colon">5</td>
+      <td class="semi-colon">5</td>
+      <td class="short">5</td>
+      <td class="punch high-dot">5</td>
+      <td class="question-mark">5</td>
+      <td class="double-quote">5</td>
+      <td class="equals">5</td>
+      <td class="exclamation-mark">5</td>
+      <td class="punch left-parens">5</td>
+      <td class="comma-2">5</td>
+      <td class="period-2">5</td>
+      <td class="67">5</td>
+      <td class="68">5</td>
+      <td class="69">5</td>
+      <td class="70">5</td>
+      <td class="71">5</td>
+      <td class="72">5</td>
+      <td class="73">5</td>
+      <td class="74">5</td>
+      <td class="75">5</td>
+      <td class="76">5</td>
+      <td class="77">5</td>
+      <td class="78">5</td>
+      <td class="79">5</td>
+      <td class="80">5</td>
+    </tr>
+
+    <tr class="6">
+      <td class="null">6</td>
+      <td class="0">6</td>
+      <td class="1">6</td>
+      <td class="2">6</td>
+      <td class="3">6</td>
+      <td class="4">6</td>
+      <td class="5">6</td>
+      <td class="punch 6">6</td>
+      <td class="7">6</td>
+      <td class="8">6</td>
+      <td class="9">6</td>
+      <td class="A">6</td>
+      <td class="B">6</td>
+      <td class="C">6</td>
+      <td class="D">6</td>
+      <td class="E">6</td>
+      <td class="punch F">6</td>
+      <td class="G">6</td>
+      <td class="H">6</td>
+      <td class="I">6</td>
+      <td class="J">6</td>
+      <td class="K">6</td>
+      <td class="L">6</td>
+      <td class="M">6</td>
+      <td class="N">6</td>
+      <td class="punch O">6</td>
+      <td class="P">6</td>
+      <td class="Q">6</td>
+      <td class="R">6</td>
+      <td class="S">6</td>
+      <td class="T">6</td>
+      <td class="U">6</td>
+      <td class="V">6</td>
+      <td class="punch W">6</td>
+      <td class="X">6</td>
+      <td class="Y">6</td>
+      <td class="Z">6</td>
+      <td class="pound">6</td>
+      <td class="comma">6</td>
+      <td class="dollar-sign">6</td>
+      <td class="period">6</td>
+      <td class="dash">6</td>
+      <td class="at">6</td>
+      <td class="percent">6</td>
+      <td class="wildcard">6</td>
+      <td class="less-than">6</td>
+      <td class="subtract">6</td>
+      <td class="divide">6</td>
+      <td class="punch plus">6</td>
+      <td class="underscore">6</td>
+      <td class="right-parens">6</td>
+      <td class="cent">6</td>
+      <td class="pipe">6</td>
+      <td class="amperstand">6</td>
+      <td class="punch greater-than">6</td>
+      <td class="colon">6</td>
+      <td class="punch semi-colon">6</td>
+      <td class="short">6</td>
+      <td class="high-dot">6</td>
+      <td class="question-mark">6</td>
+      <td class="double-quote">6</td>
+      <td class="punch equals">6</td>
+      <td class="exclamation-mark">6</td>
+      <td class="left-parens">6</td>
+      <td class="comma-2">6</td>
+      <td class="period-2">6</td>
+      <td class="67">6</td>
+      <td class="68">6</td>
+      <td class="69">6</td>
+      <td class="70">6</td>
+      <td class="71">6</td>
+      <td class="72">6</td>
+      <td class="73">6</td>
+      <td class="74">6</td>
+      <td class="75">6</td>
+      <td class="76">6</td>
+      <td class="77">6</td>
+      <td class="78">6</td>
+      <td class="79">6</td>
+      <td class="80">6</td>
+    </tr>
+
+    <tr class="7">
+      <td class="null">7</td>
+      <td class="0">7</td>
+      <td class="1">7</td>
+      <td class="2">7</td>
+      <td class="3">7</td>
+      <td class="4">7</td>
+      <td class="5">7</td>
+      <td class="6">7</td>
+      <td class="punch 7">7</td>
+      <td class="8">7</td>
+      <td class="9">7</td>
+      <td class="A">7</td>
+      <td class="B">7</td>
+      <td class="C">7</td>
+      <td class="D">7</td>
+      <td class="E">7</td>
+      <td class="F">7</td>
+      <td class="punch G">7</td>
+      <td class="H">7</td>
+      <td class="I">7</td>
+      <td class="J">7</td>
+      <td class="K">7</td>
+      <td class="L">7</td>
+      <td class="M">7</td>
+      <td class="N">7</td>
+      <td class="O">7</td>
+      <td class="punch P">7</td>
+      <td class="Q">7</td>
+      <td class="R">7</td>
+      <td class="S">7</td>
+      <td class="T">7</td>
+      <td class="U">7</td>
+      <td class="V">7</td>
+      <td class="W">7</td>
+      <td class="punch X">7</td>
+      <td class="Y">7</td>
+      <td class="Z">7</td>
+      <td class="pound">7</td>
+      <td class="comma">7</td>
+      <td class="dollar-sign">7</td>
+      <td class="period">7</td>
+      <td class="dash">7</td>
+      <td class="at">7</td>
+      <td class="percent">7</td>
+      <td class="wildcard">7</td>
+      <td class="less-than">7</td>
+      <td class="subtract">7</td>
+      <td class="divide">7</td>
+      <td class="plus">7</td>
+      <td class="underscore">7</td>
+      <td class="right-parens">7</td>
+      <td class="cent">7</td>
+      <td class="punch pipe">7</td>
+      <td class="amperstand">7</td>
+      <td class="greater-than">7</td>
+      <td class="colon">7</td>
+      <td class="semi-colon">7</td>
+      <td class="punch short">7</td>
+      <td class="high-dot">7</td>
+      <td class="punch question-mark">7</td>
+      <td class="punch double-quote">7</td>
+      <td class="equals">7</td>
+      <td class="exclamation-mark">7</td>
+      <td class="left-parens">7</td>
+      <td class="comma-2">7</td>
+      <td class="period-2">7</td>
+      <td class="67">7</td>
+      <td class="68">7</td>
+      <td class="69">7</td>
+      <td class="70">7</td>
+      <td class="71">7</td>
+      <td class="72">7</td>
+      <td class="73">7</td>
+      <td class="74">7</td>
+      <td class="75">7</td>
+      <td class="76">7</td>
+      <td class="77">7</td>
+      <td class="78">7</td>
+      <td class="79">7</td>
+      <td class="80">7</td>
+    </tr>
+
+    <tr class="8">
+      <td class="null">8</td>
+      <td class="0">8</td>
+      <td class="1">8</td>
+      <td class="2">8</td>
+      <td class="3">8</td>
+      <td class="4">8</td>
+      <td class="5">8</td>
+      <td class="6">8</td>
+      <td class="7">8</td>
+      <td class="punch 8">8</td>
+      <td class="9">8</td>
+      <td class="A">8</td>
+      <td class="B">8</td>
+      <td class="C">8</td>
+      <td class="D">8</td>
+      <td class="E">8</td>
+      <td class="F">8</td>
+      <td class="G">8</td>
+      <td class="punch H">8</td>
+      <td class="I">8</td>
+      <td class="J">8</td>
+      <td class="K">8</td>
+      <td class="L">8</td>
+      <td class="M">8</td>
+      <td class="N">8</td>
+      <td class="O">8</td>
+      <td class="P">8</td>
+      <td class="punch Q">8</td>
+      <td class="R">8</td>
+      <td class="S">8</td>
+      <td class="T">8</td>
+      <td class="U">8</td>
+      <td class="V">8</td>
+      <td class="W">8</td>
+      <td class="X">8</td>
+      <td class="punch Y">8</td>
+      <td class="Z">8</td>
+      <td class="punch pound">8</td>
+      <td class="punch comma">8</td>
+      <td class="punch dollar-sign">8</td>
+      <td class="punch period">8</td>
+      <td class="dash">8</td>
+      <td class="punch at">8</td>
+      <td class="punch percent">8</td>
+      <td class="punch wildcard">8</td>
+      <td class="punch less-than">8</td>
+      <td class="subtract">8</td>
+      <td class="divide">8</td>
+      <td class="punch plus">8</td>
+      <td class="punch underscore">8</td>
+      <td class="punch right-parens">8</td>
+      <td class="punch cent">8</td>
+      <td class="punch pipe">8</td>
+      <td class="amperstand">8</td>
+      <td class="punch greater-than">8</td>
+      <td class="punch colon">8</td>
+      <td class="punch semi-colon">8</td>
+      <td class="punch short">8</td>
+      <td class="punch high-dot">8</td>
+      <td class="punch question-mark">8</td>
+      <td class="punch double-quote">8</td>
+      <td class="punch equals">8</td>
+      <td class="punch exclamation-mark">8</td>
+      <td class="punch left-parens">8</td>
+      <td class="punch comma-2">8</td>
+      <td class="punch period-2">8</td>
+      <td class="67">8</td>
+      <td class="68">8</td>
+      <td class="69">8</td>
+      <td class="70">8</td>
+      <td class="71">8</td>
+      <td class="72">8</td>
+      <td class="73">8</td>
+      <td class="74">8</td>
+      <td class="75">8</td>
+      <td class="76">8</td>
+      <td class="77">8</td>
+      <td class="78">8</td>
+      <td class="79">8</td>
+      <td class="80">8</td>
+    </tr>
+
+    <tr class="9">
+      <td class="null">9</td>
+      <td class="0">9</td>
+      <td class="1">9</td>
+      <td class="2">9</td>
+      <td class="3">9</td>
+      <td class="4">9</td>
+      <td class="5">9</td>
+      <td class="6">9</td>
+      <td class="7">9</td>
+      <td class="8">9</td>
+      <td class="punch 9">9</td>
+      <td class="A">9</td>
+      <td class="B">9</td>
+      <td class="C">9</td>
+      <td class="D">9</td>
+      <td class="E">9</td>
+      <td class="F">9</td>
+      <td class="G">9</td>
+      <td class="H">9</td>
+      <td class="punch I">9</td>
+      <td class="J">9</td>
+      <td class="K">9</td>
+      <td class="L">9</td>
+      <td class="M">9</td>
+      <td class="N">9</td>
+      <td class="O">9</td>
+      <td class="P">9</td>
+      <td class="Q">9</td>
+      <td class="punch R">9</td>
+      <td class="S">9</td>
+      <td class="T">9</td>
+      <td class="U">9</td>
+      <td class="V">9</td>
+      <td class="W">9</td>
+      <td class="X">9</td>
+      <td class="Y">9</td>
+      <td class="punch Z">9</td>
+      <td class="pound">9</td>
+      <td class="comma">9</td>
+      <td class="dollar-sign">9</td>
+      <td class="period">9</td>
+      <td class="dash">9</td>
+      <td class="at">9</td>
+      <td class="percent">9</td>
+      <td class="wildcard">9</td>
+      <td class="less-than">9</td>
+      <td class="subtract">9</td>
+      <td class="divide">9</td>
+      <td class="plus">9</td>
+      <td class="underscore">9</td>
+      <td class="right-parens">9</td>
+      <td class="cent">9</td>
+      <td class="pipe">9</td>
+      <td class="amperstand">9</td>
+      <td class="greater-than">9</td>
+      <td class="colon">9</td>
+      <td class="semi-colon">9</td>
+      <td class="short">9</td>
+      <td class="high-dot">9</td>
+      <td class="question-mark">9</td>
+      <td class="double-quote">9</td>
+      <td class="equals">9</td>
+      <td class="exclamation-mark">9</td>
+      <td class="left-parens">9</td>
+      <td class="comma-2">9</td>
+      <td class="period-2">9</td>
+      <td class="67">9</td>
+      <td class="68">9</td>
+      <td class="69">9</td>
+      <td class="70">9</td>
+      <td class="71">9</td>
+      <td class="72">9</td>
+      <td class="73">9</td>
+      <td class="74">9</td>
+      <td class="75">9</td>
+      <td class="76">9</td>
+      <td class="77">9</td>
+      <td class="78">9</td>
+      <td class="79">9</td>
+      <td class="80">9</td>
+    </tr>
+
+    <tr class="col">
+      <td class="null">1</td>
+      <td class="0">2</td>
+      <td class="1">3</td>
+      <td class="2">4</td>
+      <td class="3">5</td>
+      <td class="4">6</td>
+      <td class="5">7</td>
+      <td class="6">8</td>
+      <td class="7">9</td>
+      <td class="8">10</td>
+      <td class="9">11</td>
+      <td class="A">12</td>
+      <td class="B">13</td>
+      <td class="C">14</td>
+      <td class="D">15</td>
+      <td class="E">16</td>
+      <td class="F">17</td>
+      <td class="G">18</td>
+      <td class="H">19</td>
+      <td class="I">20</td>
+      <td class="J">21</td>
+      <td class="K">22</td>
+      <td class="L">23</td>
+      <td class="M">24</td>
+      <td class="N">25</td>
+      <td class="O">26</td>
+      <td class="P">27</td>
+      <td class="Q">28</td>
+      <td class="R">29</td>
+      <td class="S">30</td>
+      <td class="T">31</td>
+      <td class="U">32</td>
+      <td class="V">33</td>
+      <td class="W">34</td>
+      <td class="X">35</td>
+      <td class="Y">36</td>
+      <td class="Z">37</td>
+      <td class="pound">38</td>
+      <td class="comma">39</td>
+      <td class="dollar-sign">40</td>
+      <td class="period">41</td>
+      <td class="dash">42</td>
+      <td class="at">43</td>
+      <td class="percent">44</td>
+      <td class="wildcard">45</td>
+      <td class="less-than">46</td>
+      <td class="subtract">47</td>
+      <td class="divide">48</td>
+      <td class="plus">49</td>
+      <td class="underscore">50</td>
+      <td class="right-parens">51</td>
+      <td class="cent">52</td>
+      <td class="pipe">53</td>
+      <td class="amperstand">54</td>
+      <td class="greater-than">55</td>
+      <td class="colon">56</td>
+      <td class="semi-colon">57</td>
+      <td class="short">58</td>
+      <td class="high-dot">59</td>
+      <td class="question-mark">60</td>
+      <td class="double-quote">61</td>
+      <td class="equals">62</td>
+      <td class="exclamation-mark">63</td>
+      <td class="left-parens">64</td>
+      <td class="comma-2">65</td>
+      <td class="period-2">66</td>
+      <td class="67">67</td>
+      <td class="68">68</td>
+      <td class="69">69</td>
+      <td class="70">70</td>
+      <td class="71">71</td>
+      <td class="72">72</td>
+      <td class="73">73</td>
+      <td class="74">74</td>
+      <td class="75">75</td>
+      <td class="76">76</td>
+      <td class="77">77</td>
+      <td class="78">78</td>
+      <td class="79">79</td>
+      <td class="80">80</td>
+    </tr>
+  </table>
+</body>
+</html>
