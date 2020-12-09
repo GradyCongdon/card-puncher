@@ -1,0 +1,119 @@
+:root {
+    --blue: rgb(129 158 191);
+    --black: rgb(37 47 61);
+    --white: rgb(244 244 244);
+    --grey: rgb(76 89 105);
+}
+
+body {
+background-color: var(--white);
+width: 100vw;
+height: 100vh;
+padding: 10vh 0;
+font-family: monospace;
+box-sizing: border-box;
+}
+
+table {
+  background: url('noise.png'), var(--blue);
+  color: var(--black);
+  width: 88vw;
+  height: 42vh;
+  border-radius: 5.5vh 2vh 4vh 2.5vh;
+  padding: 0 3vw 1vh;
+  table-layout: fixed;
+
+  border-spacing: 0;
+  border-collapse: separate;
+}
+.wrap {
+  position: relative;
+}
+
+#id { 
+  rotate:-90deg;
+  position: absolute;
+  bottom: 40px;
+  right: 5px;
+
+}
+
+td {
+  text-align: center;
+  width: .01333333vw;
+  height: .04vh;
+  width: 8px;
+  height: 20px;
+
+}
+td .row {
+  /*
+  transform: scale(1, 1.5);
+  -webkit-transform: scale(1, 1.5); /* Safari and Chrome */
+  -moz-transform: scale(1, 1.5); /* Firefox */
+  -ms-transform: scale(1, 1.5); /* IE 9+ */
+  -o-transform: scale(1, 1.5); /* Opera */
+  */
+}
+tr:not(.tough) td:hover,
+td.punch {
+  background: linear-gradient(301deg, rgba(244,244,244,1) 0%, rgb(241 241 241) -11%, rgba(232,232,232,1) 100%);
+  
+  font-size: 0;
+  border-top: 2px solid var(--blue);
+  border-left: 2px solid var(--blue);
+  border-right: solid 2px #8290a0;
+  border-bottom: solid 1px #6b8eb5;
+
+}
+tr.col {
+  position: relative;
+  top: -1rem;
+  font-size: 5.75pt;
+}
+tr.col td {
+  height: 10px;
+}
+.chars {
+  margin-top: -1rem;
+  color: var(--grey);
+  font-size: 13pt;
+}
+/*
+table:before {
+   content: ' ';
+   position: absolute;
+   top: 0;
+   left: 60px;
+   border-top: 60px solid var(--white);
+   width: 0;
+}
+*/
+@media (min-width: 1024px) and (max-width: 4000px) {
+  table {
+    width: 1300px;
+    margin: 0;
+  }
+}
+
+
+@media (max-width: 1000px) {
+  table {
+    
+ transform: translate(50%) rotate(90deg);
+    transform-origin: left top;
+
+    -webkit-transform: translate(50%) rotate(90deg);
+    -webkit-transform-origin: left top;
+  }
+  .label {
+    transform: translate(12%) rotate(90deg);
+    transform-origin: left top;
+    -webkit-transform: translate(12%) rotate(90deg);
+    -webkit-transform-origin: left top;
+  }
+  body {
+    padding: 0;
+  }
+}
+
